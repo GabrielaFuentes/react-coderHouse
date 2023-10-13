@@ -1,10 +1,10 @@
 import React from "react";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const CardWidget = () => {
   return (
     <div>
-      <LocalMallIcon sx={{ color: "#219C90", fontSize: "40px" }} />
+      <ShoppingCartIcon sx={{ fontSize: "20px" }} />
       <span>0</span>
     </div>
   );
