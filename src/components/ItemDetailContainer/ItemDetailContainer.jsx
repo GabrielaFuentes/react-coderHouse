@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./ListUser.css";
 import CardUser from "../CardUser/CardUser";
 
 import { Link } from "react-router-dom";
 
-const ListUser = () => {
+const ItemDetailContainer = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -29,4 +28,4 @@ const ListUser = () => {
   );
 };
 
-export default ListUser;
+export default ItemDetailContainer;

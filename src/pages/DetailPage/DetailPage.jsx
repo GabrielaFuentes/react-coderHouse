@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { useParams } from "react-router-dom";
-
-
 import ProductsCard from "../../components/ProductsCard/ProductsCard";
+
 
 const DetailPage = () => {
   let { id } = useParams();
@@ -18,7 +16,7 @@ const DetailPage = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="cards-list">
       {product.id ? <ProductsCard product={product} /> : null}
     </div>
   );
