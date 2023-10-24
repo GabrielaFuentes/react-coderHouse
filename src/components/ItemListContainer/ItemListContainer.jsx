@@ -37,7 +37,6 @@ function ItemListContainer() {
 
   useEffect(() => {
     if (selectedCategory) {
-      // Realiza una solicitud para obtener productos relacionados con la categoría seleccionada
       axios
         .get(`https://api.mercadolibre.com/sites/MLA/search?category=${selectedCategory.id}`)
         .then((response) => {

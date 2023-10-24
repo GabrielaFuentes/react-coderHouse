@@ -1,8 +1,9 @@
 import "./App.css";
 import { useState } from 'react';
-import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import NavBar from "./components/Navbar/Navbar";
 import ProductsCard from "./components/ProductsCard/ProductsCard";
+import NotFound from "./pages/NotFound/NotFound";
+
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -24,19 +25,22 @@ const App = () => {
   return (
     <>
       <Router>
-        <NavBar onSearch={handleSearch} />
         <Routes>
+          <Route element={<NavBar onSearch={handleSearch}/>}>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/detail/:id" element={<DetailPage />} />
+         
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
+      
       </Router>
       <div className="App">
         <div>
-
-          <ItemListContainer />
           {hasSearched && (
+
             <div>
               {productData.length > 0 ? (
                 productData.map((product) => (
@@ -49,6 +53,7 @@ const App = () => {
           )}
         </div>
       </div>
+      
     </>
   );
 };

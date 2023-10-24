@@ -47,7 +47,7 @@ const SearchProduct = ({onSearch}) => {
     <div className="App">
       
       <div style={{ margin: 40 }}>
-        <form onSubmit={onSubmit}>
+        <form form onSubmit={e => onSubmit(e)}>
           <TextField
             placeholder="Buscar producto..."
             variant="outlined"
