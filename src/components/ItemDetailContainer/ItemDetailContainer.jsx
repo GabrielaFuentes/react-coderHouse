@@ -1,26 +1,35 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CardUser from "../CardUser/CardUser";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import ProductsCard from "../ProductsCard/ProductsCard";
 
 const ItemDetailContainer = () => {
   const [products, setProducts] = useState([]);
 
+  const { id } = useParams();
+  console.log(id);
+
   useEffect(() => {
-    axios("https://api.mercadolibre.com/sites/MLA/search?q=").then((res) =>
-      setProducts(res.data.results)
-    );
-  }, []);
+    axios(`https://api.mercadolibre.com/items/${id}`)
+      .then((res) => {
+        console.log("Producto:", res.data);
+        setProducts(res.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los detalles del producto:", error);
+      });
+  }, [id]);
 
   return (
-    <div className="Cards-List">
+    <div>
       {products.map((product) => {
         return (
           <div key={product.id}>
-            <Link to={`/detail/${product.id}`}>
-              <CardUser product={product} />
+            <Link to={`/items/${product.id}`} key={product.id}>
+              <ProductsCard product={product.id} />
             </Link>
+            
           </div>
         );
       })}
