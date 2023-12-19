@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css'
 import { useState } from 'react';
 import NavBar from "./components/Navbar/Navbar";
 import ProductsCard from "./components/ProductsCard/ProductsCard";
@@ -10,7 +10,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import ContactPage from "./pages/ContactPage/ContactPage";
-import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 
 const App = () => {
   const [productData, setProductData] = useState([]);
@@ -29,11 +30,12 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/items/:id" element={<ItemDetailContainer />} />
+          <Route path="/productos/:id" element={<ItemListContainer />} />
+          <Route path="/item/:itemId" element={<ItemDetailContainer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-      <div className="App">
+      <div className='flex '>
         <div>
           {hasSearched && (
             <div>

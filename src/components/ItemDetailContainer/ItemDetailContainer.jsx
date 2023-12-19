@@ -1,40 +1,40 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { obtenerDatos } from "../../utils/utils";
+import { useParams } from "react-router-dom";
+import ItemDetail from "../ItemDetail/ItemDetail";
 
-import { Link, useParams } from "react-router-dom";
-import ProductsCard from "../ProductsCard/ProductsCard";
-
-const ItemDetailContainer = () => {
-  const [products, setProducts] = useState([]);
-
-  const { id } = useParams();
-  console.log(id);
-
+function ItemDetailContainer() {
+  // eslint-disable-next-line no-unused-vars
+  const [item, setItem] = useState(null);
+  const { itemId } = useParams();
+  
   useEffect(() => {
-    axios(`https://api.mercadolibre.com/items/${id}`)
-      .then((res) => {
-        console.log("Producto:", res.data);
-        setProducts(res.data);
+  
+    obtenerDatos()
+      .then((data) => {
+  
+        const selectedItem = data.find(prod => prod.id  === itemId);
+  
+        setItem(selectedItem);
       })
-      .catch((error) => {
-        console.error("Error al obtener los detalles del producto:", error);
+      .catch(error => {
+        console.error("Error fetching data:", error);
       });
-  }, [id]);
+  }, [itemId]);
+  
 
   return (
-    <div>
-      {products.map((product) => {
-        return (
-          <div key={product.id}>
-            <Link to={`/items/${product.id}`} key={product.id}>
-              <ProductsCard product={product.id} />
-            </Link>
-            
-          </div>
-        );
-      })}
-    </div>
+    <>
+ {item && <ItemDetail
+        thumbnail={item.thumbnail}
+        title={item.title}
+        price={item.price}
+        currency_id={item.currency_id}
+        condition={item.condition}
+        id={item.id}
+        description={item.description}
+      />}    </>
   );
-};
+}
 
 export default ItemDetailContainer;

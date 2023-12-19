@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import axios from 'axios';
+import { MOCK_DATA } from '../../mock/data';
 import ProductsCard from './../ProductsCard/ProductsCard';
 
 function ItemListContainer() {
@@ -9,6 +9,9 @@ function ItemListContainer() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [loading, setLoading] = useState(true);
+
 
   const open = Boolean(anchorEl);
 
@@ -26,25 +29,19 @@ function ItemListContainer() {
   };
 
   useEffect(() => {
-    axios.get('https://api.mercadolibre.com/sites/MLA/categories')
-      .then((response) => {
-        setCategories(response.data);
-      })
-      .catch((error) => {
-        console.error('Error al obtener las categorías:', error);
-      });
+    // Obtén las categorías únicas de los productos
+    const uniqueCategories = [...new Set(MOCK_DATA.map((product) => product.category_id))];
+    setCategories(uniqueCategories);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
+    // Filtra los productos relacionados por la categoría seleccionada
     if (selectedCategory) {
-      axios
-        .get(`https://api.mercadolibre.com/sites/MLA/search?category=${selectedCategory.id}`)
-        .then((response) => {
-          setRelatedProducts(response.data.results);
-        })
-        .catch((error) => {
-          console.error('Error al obtener los productos relacionados:', error);
-        });
+      const filteredProducts = MOCK_DATA.filter((product) => product.category_id === selectedCategory);
+      setRelatedProducts(filteredProducts);
+    } else {
+      setRelatedProducts([]); // Si no hay categoría seleccionada, muestra todos los productos
     }
   }, [selectedCategory]);
 
@@ -70,16 +67,17 @@ function ItemListContainer() {
       >
         {categories.map((category) => (
           <MenuItem
-            key={category.id}
+            key={category}
             onClick={() => handleCategoryClick(category)}
           >
-            {category.name}
+            {category}
           </MenuItem>
         ))}
       </Menu>
-      {relatedProducts.length > 0 && relatedProducts.map((product) => (
-        <ProductsCard key={product.id} productData={product} />
-      ))}
+      {relatedProducts.length > 0 &&
+        relatedProducts.map((product) => (
+          <ProductsCard key={product.id} productData={product} />
+        ))}
     </div>
   );
 }
