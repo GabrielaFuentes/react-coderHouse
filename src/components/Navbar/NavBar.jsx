@@ -1,40 +1,33 @@
 import img from "./logo.png";
 import CartWidget from "../CartWidget/CartWidget"
-import SearchProduct from "../SearchProduct/SearchProduct";
-import ItemListContainer from "../ItemListContainer/ItemListContainer"
+
+
 
 
 import { Link } from "react-router-dom";
 
-const NavBar = ({ onSearch}) => {
- 
- 
+const NavBar = () => {
+
+
 
   return (
     <>
       <nav className="bg-yellow-400">
 
-        <ul className="m-auto py-6 flex justify-between items-center">
-         <Link to="/"><img src={img} alt="logo-shop" className="w-28"/> </Link> 
-          <Link className="nav-link" to="/">
+        <ul className="m-auto py-6 flex justify-around items-center">
+          <Link to="/"><img src={img} alt="logo-shop" className="w-28" /> </Link>
+          <Link to="/">
             Home
           </Link>
-          <Link className="nav-link" to="/about">
+          <Link to="/about">
             About
           </Link>
-          <Link className="nav-link" to="/contact">
-            Contact
-          </Link>
 
-      
-        
           <CartWidget />
-          <SearchProduct onSearch={onSearch} />
 
-          
-          </ul>
+        </ul>
       </nav>
-       <ItemListContainer />
+
     </>
   );
 };

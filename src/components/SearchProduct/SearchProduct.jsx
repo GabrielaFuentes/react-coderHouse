@@ -25,7 +25,7 @@ const SearchProduct = ({ onSearch }) => {
     e.preventDefault();
 
     const product = value.toLowerCase().replace(/ /g, "");
-    console.log("Product a buscar:", product);
+   
 
     if (product) {
       axios
@@ -46,7 +46,7 @@ const SearchProduct = ({ onSearch }) => {
     <div>
 
       <div style={{ margin: 40 }}>
-        <form form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={ onSubmit}>
           <TextField
             placeholder="Buscar producto..."
             variant="outlined"

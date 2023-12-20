@@ -1,8 +1,8 @@
-//import ProductsCard from '../../components/ProductsCard/ProductsCard'
+import ItemListContainer from '../../components/ItemListContainer/ItemListContainer'
 
 function HomePage() {
   return <>
-
+<ItemListContainer />
     </>;
 }
 

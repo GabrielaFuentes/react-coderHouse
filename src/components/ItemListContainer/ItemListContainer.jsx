@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Link } from 'react-router-dom';  // Importamos Link
 import { MOCK_DATA } from '../../mock/data';
 import ProductsCard from './../ProductsCard/ProductsCard';
 
@@ -9,9 +10,6 @@ function ItemListContainer() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [loading, setLoading] = useState(true);
-
 
   const open = Boolean(anchorEl);
 
@@ -29,19 +27,16 @@ function ItemListContainer() {
   };
 
   useEffect(() => {
-    // Obtén las categorías únicas de los productos
     const uniqueCategories = [...new Set(MOCK_DATA.map((product) => product.category_id))];
     setCategories(uniqueCategories);
-    setLoading(false);
   }, []);
 
   useEffect(() => {
-    // Filtra los productos relacionados por la categoría seleccionada
     if (selectedCategory) {
       const filteredProducts = MOCK_DATA.filter((product) => product.category_id === selectedCategory);
       setRelatedProducts(filteredProducts);
     } else {
-      setRelatedProducts([]); // Si no hay categoría seleccionada, muestra todos los productos
+      setRelatedProducts([]);
     }
   }, [selectedCategory]);
 
@@ -70,7 +65,10 @@ function ItemListContainer() {
             key={category}
             onClick={() => handleCategoryClick(category)}
           >
-            {category}
+
+            <Link to={`/category/${category}`}>
+              {category}
+            </Link>
           </MenuItem>
         ))}
       </Menu>
