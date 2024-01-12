@@ -55,7 +55,7 @@ const SearchProduct = ({ onSearch }) => {
             onChange={handlerOnChange}
           />
           <IconButton variant="contained" type="submit">
-            <SearchIcon className="btn" />
+            <SearchIcon  />
           </IconButton>
         </form>
 

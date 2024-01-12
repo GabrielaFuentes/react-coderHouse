@@ -5,13 +5,16 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea, CardActions } from "@mui/material";
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
+import "./../ItemDetail/ItemDetail.css"
 
 
-const ProductsCard = ({ productData }) => {
+
+const ProductsCard = ({ productData, buttonText= 'Ver mas' }) => {
   const { thumbnail, title, price, currency_id, condition } = productData
   return (
-    <div className="flex space-x-4">
-      <Card>
+    <div >
+
+      <Card > 
         <CardActionArea>
           <CardMedia
             component="img"
@@ -32,7 +35,7 @@ const ProductsCard = ({ productData }) => {
           </CardContent>
           <CardActions>
             <Button size="small">
-              <Link to={`/item/${productData.id}`}> Ver mas</Link>
+              <Link to={`/item/${productData.id}`}>{buttonText}</Link>
             </Button>
           </CardActions>
         </CardActionArea>

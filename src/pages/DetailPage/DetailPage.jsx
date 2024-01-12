@@ -16,7 +16,7 @@ const DetailPage = () => {
   }, [id]);
 
   return (
-    <div className="flex flex-wrap justify-start gap-10 items-center">
+    <div>
       {product.id ? <ProductsCard product={product} /> : null}
     </div>
   );

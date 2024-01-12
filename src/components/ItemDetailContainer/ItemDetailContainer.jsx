@@ -27,7 +27,7 @@ function ItemDetailContainer() {
   return (
     <>
       {item && (
-        <div className="container m-auto mt-8">
+        <div>
           <Link to="/">
             <Button>Volver</Button>
           </Link>
