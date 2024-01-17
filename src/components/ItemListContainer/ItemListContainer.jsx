@@ -1,83 +1,37 @@
-import { useEffect, useState } from 'react';
-import { Button, Menu, MenuItem } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Link } from 'react-router-dom';  // Importamos Link
-import { MOCK_DATA } from '../../mock/data';
-import ProductsCard from './../ProductsCard/ProductsCard';
+import { useEffect, useState } from "react";
+import ItemList from "../ItemList/ItemList";
+import { obtenerDatos } from "../../utils/utils";
+import { useParams } from "react-router-dom";
 
-function ItemListContainer() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
-
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    handleClose();
-  };
+const ItemListContainer = () => {
+  const [productos, setProductos] = useState([]);
+  const { category_id } = useParams();
+  console.log('category_id:', category_id);
 
   useEffect(() => {
-    const uniqueCategories = [...new Set(MOCK_DATA.map((product) => product.category_id))];
-    setCategories(uniqueCategories);
-  }, []);
+    obtenerDatos()
+      .then((data) => {
+        console.log('Data obtenida:', data);
 
-  useEffect(() => {
-    if (selectedCategory) {
-      const filteredProducts = MOCK_DATA.filter((product) => product.category_id === selectedCategory);
-      setRelatedProducts(filteredProducts);
-    } else {
-      setRelatedProducts([]);
-    }
-  }, [selectedCategory]);
+        const items = category_id
+          ? data.filter((prod) => prod.category_id === category_id)
+          : data;
+
+        console.log('Items después del filtro:', items);
+        setProductos(items);
+      })
+      .catch((error) => {
+        console.error('Error obteniendo datos:', error);
+      });
+  }, [category_id]);
+
+  console.log('Productos renderizados:', productos);
 
   return (
-    <div>
-      <Button
-        id="demo-customized-button"
-        aria-controls={open ? 'demo-customized-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
-        Categorías
-      </Button>
-      <Menu
-        id="demo-customized-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {categories.map((category) => (
-          <MenuItem
-            key={category}
-            onClick={() => handleCategoryClick(category)}
-          >
-
-            <Link to={`/category/${category}`}>
-              {category}
-            </Link>
-          </MenuItem>
-        ))}
-      </Menu>
-      {relatedProducts.length > 0 &&
-        relatedProducts.map((product) => (
-          <ProductsCard key={product.id} productData={product} />
-        ))}
-    </div>
+    <>
+      <ItemList productos={productos} />
+    </>
   );
-}
+};
 
 export default ItemListContainer;

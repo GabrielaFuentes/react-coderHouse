@@ -5,18 +5,14 @@ import ItemDetail from "../ItemDetail/ItemDetail";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 
-
 function ItemDetailContainer() {
   const [item, setItem] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-
     obtenerDatos()
       .then((data) => {
-
         const selectedItem = data.find(prod => prod.id === id);
-
         setItem(selectedItem);
       })
       .catch(error => {
@@ -27,25 +23,22 @@ function ItemDetailContainer() {
   return (
     <>
       {item && (
-        <div>
+        <div className="container m-auto mt-8">
           <Link to="/">
             <Button>Volver</Button>
           </Link>
           <ItemDetail
-            itemId={{
-              thumbnail: item.thumbnail,
-              title: item.title,
-              price: item.price,
-              currency_id: item.currency_id,
-              condition: item.condition,
-              description: item.description,
-            }}
+            thumbnail={item.thumbnail}
+            title={item.title}
+            price={item.price}
+            currency_id={item.currency_id}
+            condition={item.condition}
+            description={item.description}
           />
         </div>
       )}
     </>
   );
-
 }
 
 export default ItemDetailContainer;

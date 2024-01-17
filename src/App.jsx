@@ -1,7 +1,5 @@
 import './App.css'
-//import { useState } from 'react';
 import NavBar from "./components/Navbar/Navbar";
-//import ProductsCard from "./components/ProductsCard/ProductsCard";
 import NotFound from "./pages/NotFound/NotFound";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

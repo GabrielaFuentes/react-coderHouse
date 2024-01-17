@@ -1,48 +1,23 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea, CardActions } from "@mui/material";
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
-import "./../ItemDetail/ItemDetail.css"
+import "./../ItemDetail/ItemDetail.css";
 
+const ProductsCard = ({ productData, buttonText = 'Ver mas' }) => {
+  const { thumbnail, title, price, currency_id, condition } = productData;
 
-
-const ProductsCard = ({ productData, buttonText= 'Ver mas' }) => {
-  const { thumbnail, title, price, currency_id, condition } = productData
   return (
-    <div >
+    <div className="w-80 border border-gray-300 rounded-lg overflow-hidden shadow-md p-4 h-96 flex flex-col justify-between items-center">
+      <img src={thumbnail} alt="Product Image" />
+      <h4 className="text-2xl font-semibold">{title}</h4>
+      <p className="text-xl">{price} {currency_id} - {condition}</p>
 
-      <Card > 
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            image={thumbnail}
-            sx={{ width: 200 }}
-            alt="Product Image"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {price} {currency_id}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {condition}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">
-              <Link to={`/item/${productData.id}`}>{buttonText}</Link>
-            </Button>
-          </CardActions>
-        </CardActionArea>
-      </Card>
+      <Button size="small" >
+        <Link to={`/item/${productData.id}`} className="text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-700">
+          {buttonText}
+        </Link>
+      </Button>
     </div>
   );
 };
 
 export default ProductsCard;
-
