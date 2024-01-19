@@ -4,7 +4,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Link } from "react-router-dom";
-import "./../ItemDetail/ItemDetail.css";
 
 const ProductsCard = ({ productData, buttonText = 'Ver mas' }) => {
 

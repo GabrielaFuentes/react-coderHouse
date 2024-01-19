@@ -24,14 +24,13 @@ const ItemDetail = ({ id, thumbnail, title, price, currency_id, condition, descr
       stock,
       cantidad,
     };
-    console.log("Item to Cart:", itemToCart);
+
 
     addToCart(itemToCart);
     
   };
 
-  console.log("ItemDetail - cantidad:", setCantidad);
-
+ 
   return (
     <div>
       <Card sx={{ maxWidth: 345 }}>
@@ -60,7 +59,7 @@ const ItemDetail = ({ id, thumbnail, title, price, currency_id, condition, descr
             </Button>
           ) : (
             <>
-              <Quantity id={id} cantidad={cantidad} stock={stock} />
+              <Quantity id={id} cantidad={cantidad} stock={stock} setCantidad={ setCantidad }/>
               {console.log(stock)}
               <Button size="small" onClick={handleAgregar} disabled={stock === 0}>
                 Agregar a Carrito

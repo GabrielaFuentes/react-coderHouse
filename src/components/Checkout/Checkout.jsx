@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { db } from "../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
+import Button from '@mui/material/Button';
+
 import Swal from "sweetalert2";
 
 const Checkout = () => {
@@ -39,7 +41,13 @@ const Checkout = () => {
       .then((doc) => {
         setOrderId(doc.id);
         clearCart();
-        Swal.fire("Gracias por tu compra!");
+        Swal.fire({
+          icon: "success",
+          title: "Compra realizada con éxito",
+          text: `Tu código de orden es: ${doc.id}`,
+          background: "#202020",
+          color: "#FFFFFF",
+        });
       })
       .catch((error) => {
         // Manejar errores al agregar a Firestore
@@ -92,9 +100,9 @@ const Checkout = () => {
           onChange={handleInputChange}
           name="email"
         />
-        <button type="submit" className="bg-blue-500 text-white py-2">
+        <Button type="submit" className="bg-green-500 text-black py-2" disabled={!values.nombre || !values.direccion || !values.email}>
           Enviar
-        </button>
+        </Button>
       </form>
     </div>
   );

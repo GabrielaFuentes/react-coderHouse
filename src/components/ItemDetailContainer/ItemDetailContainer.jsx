@@ -27,6 +27,7 @@ function ItemDetailContainer() {
 
         setItem(doc)
         console.log(doc)
+        console.log(id)
       })
     
 
@@ -41,11 +42,13 @@ function ItemDetailContainer() {
           </Link>
           <ItemDetail
             thumbnail={item.thumbnail}
+            id={item.id}
             title={item.title}
             price={item.price}
             currency_id={item.currency_id}
             condition={item.condition}
             description={item.description}
+            stock={item.stock}
           />
         </div>
       )}
