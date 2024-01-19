@@ -1,23 +1,35 @@
 import { useEffect, useState } from 'react';
-import { obtenerDatos } from "../../utils/utils";
 import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
+import { db } from "../../firebase/config";
+import { doc, getDoc } from "firebase/firestore";
+
+
 
 function ItemDetailContainer() {
   const [item, setItem] = useState(null);
   const { id } = useParams();
 
+
   useEffect(() => {
-    obtenerDatos()
-      .then((data) => {
-        const selectedItem = data.find(prod => prod.id === id);
-        setItem(selectedItem);
+  
+
+    const docRef = doc(db, 'productos', id)
+    getDoc( docRef )
+      .then((docSnapshot) => {
+        console.log(docSnapshot)
+        const doc = {
+          ...docSnapshot.data(),
+          id: docSnapshot.id
+        }
+
+        setItem(doc)
+        console.log(doc)
       })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
+    
+
   }, [id]);
 
   return (

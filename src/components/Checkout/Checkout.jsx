@@ -1,59 +1,104 @@
-import { useContext, useState } from 'react'
-import { CartContext } from '../context/CartContext';
-import { useForm } from 'react-hook-form';
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
+import { db } from "../../firebase/config";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from './../../firebase/config';
+import Swal from "sweetalert2";
 
 const Checkout = () => {
+  const { cart, totalCart, clearCart } = useContext(CartContext);
 
-    
-    const [pedidoId, setPedidoId] = useState("");
+  const [values, setValues] = useState({
+    nombre: "",
+    direccion: "",
+    email: "",
+  });
 
-    const { carrito, precioTotal, vaciarCarrito } = useContext(CartContext);
+  const [orderId, setOrderId] = useState(null);
 
-    const { register, handleSubmit } = useForm();
+  const handleInputChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const comprar = (data) => {
-        const pedido = {
-            cliente: data,
-            productos: carrito,
-            total: precioTotal()
-        }
-        console.log(pedido);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        const pedidosRef = collection(db, "pedidos");
+    const orden = {
+      cliente: values,
+      items: cart,
+      total: totalCart(),
+      fecha: new Date(),
+    };
+    console.log(orden);
 
-        addDoc(pedidosRef, pedido)
-            .then((doc) => {
-                setPedidoId(doc.id);
-                vaciarCarrito();
-            })
+    const ordersRef = collection(db, "orders");
 
-    }
+    addDoc(ordersRef, orden)
+      .then((doc) => {
+        setOrderId(doc.id);
+        clearCart();
+        Swal.fire("Gracias por tu compra!");
+      })
+      .catch((error) => {
+        // Manejar errores al agregar a Firestore
+        console.error("Error al agregar a Firestore:", error.message);
+      });
+  };
 
-    if (pedidoId) {
-        return (
-            <div className="container">
-                <h1 className="main-title">Muchas gracias por tu compra</h1>
-                <p>Tu número de pedido es: {pedidoId}</p>
-            </div>
-        )
-    }
+  if (orderId) {
+    return (
+      <div className="container m-auto mt-10">
+        <h2 className="text-4xl font-semibold">Gracias por tu compra</h2>
+        <hr />
+        <p>Tu código de orden es: {orderId}</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="container">
-        <h1 className="main-title">Finalizar compra</h1>
-        <form className="formulario" onSubmit={handleSubmit(comprar)}>
+    <div className="container m-auto mt-10">
+      <h2 className="text-4xl font-semibold">Checkout</h2>
+      <hr />
 
-            <input type="text" placeholder="Ingresá tu nombre" {...register("nombre")} />
-            <input type="email" placeholder="Ingresá tu e-mail" {...register("email")} />
-            <input type="phone" placeholder="Ingresá tu teléfono" {...register("telefono")} />
+      <h4>Ingresa tus datos:</h4>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 max-w-md mt-4"
+      >
+        <input
+          className="border p-2"
+          type="text"
+          placeholder="Nombre"
+          value={values.nombre}
+          onChange={handleInputChange}
+          name="nombre"
+        />
 
-            <button className="enviar" type="submit">Comprar</button>
-
-        </form>
+        <input
+          className="border p-2"
+          type="text"
+          placeholder="Dirección"
+          value={values.direccion}
+          onChange={handleInputChange}
+          name="direccion"
+        />
+        <input
+          className="border p-2"
+          type="email"
+          placeholder="Email"
+          value={values.email}
+          onChange={handleInputChange}
+          name="email"
+        />
+        <button type="submit" className="bg-blue-500 text-white py-2">
+          Enviar
+        </button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;
+

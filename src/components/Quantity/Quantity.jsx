@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 
-const QuantitySelector = ({ cantidad, stock, setCantidad }) => {
+const Quantity = ({ cantidad, stock, setCantidad }) => {
   const handleSumar = () => {
     cantidad < stock && setCantidad(cantidad + 1);
   };
@@ -34,4 +34,4 @@ const QuantitySelector = ({ cantidad, stock, setCantidad }) => {
   );
 };
 
-export default QuantitySelector;
+export default Quantity;
