@@ -1,20 +1,7 @@
-import { useEffect } from 'react'
 
 const About = () => {
 
-  useEffect(() => {
-
-    const clickear = () => {
-      console.log("Click");
-    }
-
-    window.addEventListener("click", clickear)
-
-    return () => {
-      window.removeEventListener("click", clickear)
-    }
-
-  }, [])
+ 
 
   return (
     <div className="container">

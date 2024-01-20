@@ -6,7 +6,7 @@ export const obtenerDatos = () => {
     return new Promise((res) => {
         setTimeout(() => {
             res(MOCK_DATA)
-        }, 500)
+        }, 100)
     })
 }
 

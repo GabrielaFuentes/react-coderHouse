@@ -7,7 +7,7 @@ import { db } from "../../firebase/config";
 const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
   const { category_id } = useParams();
-  console.log('category_id:', category_id);
+ 
 
  
 
@@ -29,14 +29,13 @@ const ItemListContainer = () => {
           }
         })
         
-        console.log( docs )
+       
         setProductos( docs )
       })
      
 
 }, [category_id])
 
-  console.log('Productos renderizados:', productos);
 
   return (
     <>

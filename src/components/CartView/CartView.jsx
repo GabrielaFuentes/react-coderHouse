@@ -3,7 +3,7 @@ import { CartContext } from "../../context/CartContext";
 import Button from '@mui/material/Button';
 import trashIcon from "../../assets/trash.svg";
 import { Link } from "react-router-dom";
-import EmtpyCart from "./EmtpyCart";
+import EmtpyCart from "./EmtpyCart"; 
 
 const CartView = () => {
     const { cart, totalCart, clearCart, removeItem } = useContext(CartContext);
@@ -14,7 +14,7 @@ const CartView = () => {
     return (
       <section className="container m-auto mt-8">
         <h2 className="text-4xl font-semibold">Tu Compra</h2>
-        <hr />
+        <hr className=" m-3"/>
   
         <ul>
           {cart.map((item) => (

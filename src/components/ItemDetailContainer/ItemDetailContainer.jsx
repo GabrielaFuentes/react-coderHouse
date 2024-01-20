@@ -19,15 +19,14 @@ function ItemDetailContainer() {
     const docRef = doc(db, 'productos', id)
     getDoc( docRef )
       .then((docSnapshot) => {
-        console.log(docSnapshot)
+      
         const doc = {
           ...docSnapshot.data(),
           id: docSnapshot.id
         }
 
         setItem(doc)
-        console.log(doc)
-        console.log(id)
+       
       })
     
 
