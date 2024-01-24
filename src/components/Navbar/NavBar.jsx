@@ -19,14 +19,14 @@ const NavBar = () => {
 
         <ul className="m-auto py-6 flex justify-around items-center">
           <Link to="/"><img src={img} alt="logo-shop" className="w-28" /> </Link>
-          <Link to="/">
+          <Link to="/" className="text-2xl">
             Home
           </Link>
-          <Link to="/about">
-            About
+          <Link to="/contact" className="text-2xl">
+            Contacto
           </Link>
 
-          <CartWidget />
+          <CartWidget  />
 
         </ul>
         {user.logged && <div className="flex gap-4 items-center container m-auto">

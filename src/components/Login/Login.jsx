@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import "./Login.scss";
 import { UserContext } from "../../context/UserContext";
+import Button from '@mui/material/Button';
+
 
 const Login = () => {
   const { login, register, googleLogin } = useContext(UserContext);
@@ -47,24 +49,24 @@ const Login = () => {
             name="password"
           />
 
-          <button type="submit" className="bg-blue-500 text-white py-2">
+          <Button type="submit" className="bg-blue-500 text-white py-2">
             Ingresar
-          </button>
+          </Button>
         </form>
 
-        <button
+        <Button
           onClick={() => register(values)}
           className="bg-blue-500 text-white p-2 mt-4"
         >
           Registrar
-        </button>
+        </Button>
             <br/>
-        <button
+        <Button
           onClick={googleLogin}
           className="bg-blue-500 text-white p-2 mt-4"
         >
           Iniciar sesión con Google
-        </button>
+        </Button>
       </div>
     </div>
   );

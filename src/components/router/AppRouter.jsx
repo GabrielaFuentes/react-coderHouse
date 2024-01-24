@@ -11,7 +11,6 @@ import CartView from '../../components/CartView/CartView';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import HomePage from "../../pages/HomePage/HomePage";
-import AboutPage from "../../pages/AboutPage/AboutPage";
 import ContactPage from "../../pages/ContactPage/ContactPage";
 import ItemDetailContainer from '../../components/ItemDetailContainer/ItemDetailContainer';
 
@@ -26,7 +25,7 @@ const  AppRouter = () =>{
     {user.logged ? (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/category/:category_id" element={<SearchProduct />} />
       <Route path="/item/:id" element={<ItemDetailContainer />} />
