@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { Link } from 'react-router-dom';
-import ProductsCard from './../ProductsCard/ProductsCard';
+import ProductsCard from '../ProductsCard/ProductsCard';
 import { Button, Menu, MenuItem } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { ClipLoader } from 'react-spinners';
 
-const SearchProduct = () => {
+const CategoryProduct = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -134,4 +134,4 @@ const SearchProduct = () => {
   );
 }
  
-export default SearchProduct;
+export default CategoryProduct;

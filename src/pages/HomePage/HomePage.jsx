@@ -1,9 +1,9 @@
 import ItemListContainer from '../../components/ItemListContainer/ItemListContainer'
-import SearchProduct from '../../components/SearchProduct/SearchProduct';
+import CategoryProduct from '../../components/CategoryProduct/CategoryProduct';
 
 function HomePage() {
   return <>
-  <SearchProduct/>
+  <CategoryProduct/>
 <ItemListContainer />
 
     </>;

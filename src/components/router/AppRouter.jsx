@@ -1,7 +1,7 @@
 
 import { useContext } from "react";
 import { UserContext } from '../../context/UserContext';
-import SearchProduct from '../../components/SearchProduct/SearchProduct';
+import CategoryProduct from '../../components/CategoryProduct/CategoryProduct';
 import Login from "../../components/Login/Login";
 import NavBar from "../../components/Navbar/Navbar";
 import NotFound from "../../pages/NotFound/NotFound";
@@ -27,7 +27,7 @@ const  AppRouter = () =>{
       <Route path="/" element={<HomePage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="/category/:category_id" element={<SearchProduct />} />
+      <Route path="/category/:category_id" element={<CategoryProduct />} />
       <Route path="/item/:id" element={<ItemDetailContainer />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/cart" element={<CartView />} />
