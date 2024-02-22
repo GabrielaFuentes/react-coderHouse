@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import { UserContext } from '../../context/UserContext';
 import CategoryProduct from '../../components/CategoryProduct/CategoryProduct';
@@ -25,7 +24,6 @@ const  AppRouter = () =>{
     {user.logged ? (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/contact" element={<ContactPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/category/:category_id" element={<CategoryProduct />} />
       <Route path="/item/:id" element={<ItemDetailContainer />} />
