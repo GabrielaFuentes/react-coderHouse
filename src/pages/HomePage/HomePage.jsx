@@ -3,10 +3,10 @@ import CategoryProduct from '../../components/CategoryProduct/CategoryProduct';
 
 function HomePage() {
   return <>
-  <CategoryProduct/>
-<ItemListContainer />
+    <CategoryProduct />
+    <ItemListContainer />
 
-    </>;
+  </>;
 }
 
 export default HomePage;

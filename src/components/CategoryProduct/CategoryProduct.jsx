@@ -49,7 +49,6 @@ const CategoryProduct = () => {
         console.error('Error fetching categories:', error);
       }
     };
-
     fetchCategories();
   }, []);
 
@@ -67,28 +66,27 @@ const CategoryProduct = () => {
             return {
               id: doc.id,
               ...data,
-              photo: data.photo, 
+              photo: data.photo,
               description: data.description,
               price: data.price,
               stock: data.stock,
               title: data.title,
             };
           });
-          if(docs.length > 0){
+          if (docs.length > 0) {
             setRelatedProducts(docs);
-          }else{
-           
+          } else {
+
             <Link to="*" ><Button>Volver</Button></Link>
           }
-          
+
         } catch (error) {
           console.error('Error fetching products:', error);
         } finally {
-          setLoading(false); 
+          setLoading(false);
         }
       }
     };
-
     fetchProductsByCategory();
   }, [selectedCategory]);
 
@@ -120,18 +118,18 @@ const CategoryProduct = () => {
       </Menu>
 
       {loading ? (
-  <div className="spinner-container">
-    <ClipLoader color="#3f51b5" loading={loading} size={30} />
-  </div>
-) : (
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-        {relatedProducts.map((product) => (
-          <ProductsCard key={product.id} productData={product} />
-        ))}
-      </div>
-)}
+        <div className="spinner-container">
+          <ClipLoader color="#3f51b5" loading={loading} size={30} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {relatedProducts.map((product) => (
+            <ProductsCard key={product.id} productData={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
- 
+
 export default CategoryProduct;

@@ -7,18 +7,13 @@ import { db } from "../../firebase/config";
 const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
   const { category_id } = useParams();
- 
-
- 
 
   useEffect(() => {
-    
-
     // 1.- Armar una referencia (sync)
     const productosRef = collection(db, 'productos')
     const docsRef = category_id
-                      ? query( productosRef, where('category', '==', category_id))
-                      : productosRef
+      ? query(productosRef, where('category', '==', category_id))
+      : productosRef
     // 2.- LLamar a esa referencia (async)
     getDocs(docsRef)
       .then((querySnapshot) => {
@@ -28,14 +23,9 @@ const ItemListContainer = () => {
             id: doc.id
           }
         })
-        
-       
-        setProductos( docs )
+        setProductos(docs)
       })
-     
-
-}, [category_id])
-
+  }, [category_id])
 
   return (
     <>

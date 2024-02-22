@@ -6,30 +6,21 @@ import Button from '@mui/material/Button';
 import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 
-
-
 function ItemDetailContainer() {
   const [item, setItem] = useState(null);
   const { id } = useParams();
 
-
   useEffect(() => {
-  
-
     const docRef = doc(db, 'productos', id)
-    getDoc( docRef )
+    getDoc(docRef)
       .then((docSnapshot) => {
-      
+
         const doc = {
           ...docSnapshot.data(),
           id: docSnapshot.id
         }
-
         setItem(doc)
-       
       })
-    
-
   }, [id]);
 
   return (

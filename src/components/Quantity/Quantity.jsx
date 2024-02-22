@@ -22,7 +22,7 @@ const Quantity = ({ cantidad, stock, setCantidad }) => {
       <span>{cantidad}</span>
       <Button
         onClick={handleSumar}
-        className={cantidad === stock 
+        className={cantidad === stock
           ? `bg-red-300 rounded py-2 px-4 text-white font-semibold`
           : `bg-blue-600 rounded py-2 px-4 text-white font-semibold`
         }

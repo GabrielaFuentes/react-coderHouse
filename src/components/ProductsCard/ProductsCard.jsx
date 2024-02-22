@@ -21,27 +21,23 @@ const ProductsCard = ({ productData, buttonText = 'Ver mas' }) => {
             {productData.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-           {productData.price} {productData.currency_id} - {productData.condition}
+            {productData.price} {productData.currency_id} - {productData.condition}
           </Typography>
           <Typography>
-          { productData.stock <= 10 && <p className="font-bold text-red-500">Quedan sólo {productData.stock} unidades</p> }
+            {productData.stock <= 10 && <p className="font-bold text-red-500">Quedan sólo {productData.stock} unidades</p>}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-        <Link to={`/item/${productData.id}`} className="text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-700">
+          <Link to={`/item/${productData.id}`} className="text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-700">
 
-          {buttonText}
+            {buttonText}
           </Link>
         </Button>
       </CardActions>
     </Card>
   );
 };
-
-
-
-     
 
 export default ProductsCard;

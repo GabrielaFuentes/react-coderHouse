@@ -36,7 +36,7 @@ const ItemDetail = ({ id, thumbnail, title, price, currency_id, condition, descr
             <CardMedia
               image={thumbnail}
               alt="Product Image"
-              sx={{ height: 0, paddingTop: '56.25%', flex: '0 0 40%' }} 
+              sx={{ height: 0, paddingTop: '56.25%', flex: '0 0 40%' }}
             />
             <CardContent sx={{ flex: '1 1 auto' }}>
               <Typography gutterBottom variant="h5" component="div">
