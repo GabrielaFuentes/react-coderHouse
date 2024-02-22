@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from '../../context/UserContext';
-import CategoryProduct from './components/CategoryProduct/CategoryProduct';
+import CategoryProduct from '../../components/CategoryProduct/CategoryProduct';
 import Login from "../../components/Login/Login";
 import NavBar from "../../components/Navbar/Navbar";
 import NotFound from "../../pages/NotFound/NotFound";
